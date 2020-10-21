@@ -2,12 +2,18 @@ from flask import Flask,render_template,abort,jsonify,request,redirect,url_for
 
 from model import db,save_db
 
+import os
+
 app =Flask(__name__)
 
 @app.route("/")
 def welcome():
     return render_template("welcome.html",
                            cards=db)
+
+@app.route("/testing")
+def testing():
+    return "Hello "+os.environ.get("Name","Stranger")
 
 @app.route("/card/<int:index>")
 def card_view(index):
